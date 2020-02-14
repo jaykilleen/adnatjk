@@ -5,3 +5,6 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+ActiveRecord::Base.connection.execute("TRUNCATE users RESTART IDENTITY CASCADE")
+users = User.create([{ name: 'Jay Killeen', email: 'me@jaykilleen.com', password: 'password', password_confirmation: 'password' }])
