@@ -45,7 +45,11 @@ group :development do
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'better_errors'
-  gem 'factory_bot', '~> 5.1', '>= 5.1.1'
+  gem 'factory_bot_rails', '~> 5.1', '>= 5.1.1'
+end
+
+group :test do
+  gem 'shoulda-matchers'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
