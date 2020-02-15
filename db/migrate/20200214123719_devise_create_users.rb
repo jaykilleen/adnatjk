@@ -5,7 +5,6 @@ class DeviseCreateUsers < ActiveRecord::Migration[6.0]
     create_table :users do |t|
 
       t.string :name, null: false
-      t.decimal :hourly_rate, precision: 10, scale: 2, default: 0.00
 
       ## Database authenticatable
       t.string :email,              null: false, default: ""

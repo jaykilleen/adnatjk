@@ -17,7 +17,6 @@ ActiveRecord::Schema.define(version: 2020_02_14_123719) do
 
   create_table "users", force: :cascade do |t|
     t.string "name", null: false
-    t.decimal "hourly_rate", precision: 10, scale: 2, default: "0.0"
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
