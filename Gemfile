@@ -47,6 +47,7 @@ group :development do
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'better_errors'
+  gem 'binding_of_caller'
   gem 'factory_bot_rails', '~> 5.1', '>= 5.1.1'
 end
 
