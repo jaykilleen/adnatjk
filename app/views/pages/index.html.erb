@@ -1,9 +1,15 @@
-<div class="">
-  <%= render 'navbar' %>
-  <h1 class="pl-8">Adnat</h1>
-  <p class="pl-8">
-    A clone of the world's #1 platform for rostering,
-    attendance, labour insights and
-    workforce success.
-  </p>
+<div class="container mx-auto">
+  <h1 class="text-3xl bold pt-12"><%= current_user.organisation.name if current_user.organisation.present? %></h1>
+
+  <div class="flex inline-block pt-4">
+    <p class="link"><%= link_to 'Shifts', shifts_path, class: "pr-2", remote: true %></p> | 
+    <p class="link"><%= link_to 'Edit', edit_organisation_path(current_user.organisation), class: "px-2" %></p> | 
+    <p class="link"><%= link_to 'Leave', user_path(current_user, organisation_id: nil, organisational_state: 'leaving'), method: 'put', class: "pl-2" %></p>
+  </div>
+
+  <div id="shifts">
+    <% if  @shift.present? && @shift.errors.present? %>
+      <%= render "shifts/shifts"%>
+    <% end %>
+  </div>
 </div>
