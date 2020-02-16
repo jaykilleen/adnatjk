@@ -10,7 +10,12 @@
   </head>
 
   <body>
-    <%= render 'flashes' %>
+    <div class="container mx-auto">
+      <%= render 'flashes' %>
+      <%= render 'navbar' unless !current_user.present? %>
+      <h1 class="flex text-center py-2 text-5xl">Adnat</h1>
+    </div>
     <%= yield %>
+    <%= render 'footer' %>
   </body>
 </html>
