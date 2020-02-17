@@ -1,5 +1,5 @@
 <td class="border px-4 py-2"><%= shift.user.name %></td>
-<td class="border px-4 py-2"><%= shift.start.to_date %></td>
+<td class="border px-4 py-2"><%= shift.start.to_date.strftime("%a, %-d %b %y") %></td>
 <td class="border px-4 py-2"><%= shift.start.strftime("%I:%M%p") %></td>
 <td class="border px-4 py-2"><%= shift.finish.strftime("%I:%M%p") %></td>
 <td class="border px-4 py-2"><%= shift.break_length %></td>
