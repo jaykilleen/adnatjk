@@ -11,4 +11,11 @@ class Organisation < ApplicationRecord
       all_employee_shifts << shift
     end
   end
+
+  def all_archived_shifts
+    all_archived_shifts = []
+    Shift.where(organisation_id: self.id).only_deleted.order(finish: :desc).each do |shift|
+      all_archived_shifts << shift
+    end
+  end
 end

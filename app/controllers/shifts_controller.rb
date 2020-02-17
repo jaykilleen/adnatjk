@@ -3,6 +3,7 @@ class ShiftsController < ApplicationController
 
   def index
     @shifts = current_user.organisation.all_employee_shifts if !@shifts.present?
+    @shifts = current_user.organisation.all_archived_shifts if params[:deleted].present?
     @shift = Shift.new(user_id: current_user.id, organisation_id: current_user.organisation_id) if !@shift.present?
     respond_to do |format|
       format.html { render "pages/index" }

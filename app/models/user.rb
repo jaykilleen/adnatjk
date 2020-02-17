@@ -20,7 +20,7 @@ class User < ApplicationRecord
   end
 
   def restore_shifts_from organisation
-    if self.shifts.present?
+    if self.shifts.with_deleted.present?
       shifts = self.shifts.only_deleted.where(organisation_id: organisation.id)
       shifts.each do |shift|
         shift.restore
