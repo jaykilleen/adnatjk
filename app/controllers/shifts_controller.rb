@@ -61,8 +61,8 @@ class ShiftsController < ApplicationController
     @shift = Shift.new
     @shift.user_id = current_user.id
     @shift.organisation = current_user.organisation
-    @shift.start  = DateTime.parse(params[:date] + " " + params[:start]) if params[:date].present? && params[:start].present?
-    @shift.finish = DateTime.parse(params[:date] + " " + params[:finish]) if params[:date].present? && params[:start].present?
+    @shift.start  = DateTime.parse(params[:date] + " " + params[:start] + "+1000") if params[:date].present? && params[:start].present?
+    @shift.finish = DateTime.parse(params[:date] + " " + params[:finish]+ "+1000") if params[:date].present? && params[:start].present?
     @shift.break_length = params[:break_length]
   end
 
