@@ -1,6 +1,6 @@
 <div class="container mx-auto">
-  <h1 class="text-3xl bold pt-12"><%= current_user.organisation.name if current_user.organisation.present? %></h1>
-
+  <h1 class="text-3xl bold pt-12"><%= current_user.organisation.name %></h1>
+  <p>Currently paying at <%= number_to_currency(current_user.organisation.hourly_rate) %> per hour.</p>
   <div class="flex inline-block pt-4">
     <p class="link"><%= link_to 'Shifts', shifts_path, class: "pr-2", remote: true %></p> | 
     <p class="link"><%= link_to 'Edit', edit_organisation_path(current_user.organisation), class: "px-2" %></p> | 
