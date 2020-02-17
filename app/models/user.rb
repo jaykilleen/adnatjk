@@ -4,7 +4,8 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  validates :email, uniqueness: true, presence: true, case_sensitive: false
+  before_validation :downcase_email
+  validates :email, uniqueness: true, presence: true
   validates :name, presence: true
   
   belongs_to :organisation, optional: true
@@ -26,5 +27,11 @@ class User < ApplicationRecord
       end
     end
   end
+
+  private
+  
+    def downcase_email
+      self.email = email.downcase if email.present?
+    end
 
 end

@@ -1,9 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
 
-  def edit
-  end
-
   def update
     change_user_organisation if params[:organisational_state].present?
     return if params[:organisational_state].present?
