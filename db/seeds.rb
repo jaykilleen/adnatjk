@@ -11,28 +11,28 @@ ActiveRecord::Base.connection.execute("TRUNCATE organisations RESTART IDENTITY C
 ActiveRecord::Base.connection.execute("TRUNCATE shifts RESTART IDENTITY CASCADE")
 
 puts 'Seeding Users'
-user = User.create!(id: 1, name: 'Jay Killeen', email: 'me@jaykilleen.com', password: 'password', password_confirmation: 'password')
-user = User.create!(id: 2, name: 'Nancy Richards', email: 'nancy@gmail.com', password: 'password', password_confirmation: 'password')
-user = User.create!(id: 3, name: 'Roy Hunter', email: 'roy@gmail.com', password: 'password', password_confirmation: 'password')
-user = User.create!(id: 4, name: 'Sal Rogers', email: 'sal@hotmail.com', password: 'password', password_confirmation: 'password')
+jay = User.create!(name: 'Jay Killeen',    email: 'me@jaykilleen.com', password: 'password', password_confirmation: 'password')
+nan = User.create!(name: 'Nancy Richards', email: 'nancy@gmail.com',   password: 'password', password_confirmation: 'password')
+roy = User.create!(name: 'Roy Hunter',     email: 'roy@gmail.com',     password: 'password', password_confirmation: 'password')
+sal = User.create!(name: 'Sal Rogers',     email: 'sal@hotmail.com',   password: 'password', password_confirmation: 'password')
 puts "There are #{User.count} records in the users table."
 
 puts 'Seeding Organisations'
-Organisation.create!(id: 1, name: 'Strawberry Farm', hourly_rate: 9.99)
-Organisation.create!(id: 2, name: 'Pineapple Farm', hourly_rate: 20.00)
-Organisation.create!(id: 3, name: 'Cafe Tequila', hourly_rate: 15.00)
+org1 = Organisation.create!(name: 'Strawberry Farm', hourly_rate: 9.99)
+org2 = Organisation.create!(name: 'Pineapple Farm',  hourly_rate: 20.00)
+org3 = Organisation.create!(name: 'Cafe Tequila',    hourly_rate: 15.00)
 puts "There are #{Organisation.count} records in the organisations table."
 puts "There are #{User.count} records in the users table."
 
 puts 'Seeding Organisations'
-Shift.create!(organisation_id: 1, user_id: 1, break_length: "30", start: Time.parse("2020-01-22 07:30"), finish: Time.parse("2020-01-22 17:00"))
-Shift.create!(organisation_id: 1, user_id: 1, break_length: "30", start: Time.parse("2020-01-22 07:30"), finish: Time.parse("2020-01-22 17:00"))
-Shift.create!(organisation_id: 1, user_id: 2, break_length: "30", start: Time.parse("2020-01-22 07:30"), finish: Time.parse("2020-01-22 17:00"))
-Shift.create!(organisation_id: 1, user_id: 3, break_length: "15", start: Time.parse("2020-01-22 07:30"), finish: Time.parse("2020-01-22 17:00"))
-Shift.create!(organisation_id: 2, user_id: 1, break_length: "30", start: Time.parse("2020-01-22 07:30"), finish: Time.parse("2020-01-22 17:00"))
-Shift.create!(organisation_id: 2, user_id: 4, break_length: "30", start: Time.parse("2020-01-22 07:30"), finish: Time.parse("2020-01-22 17:00"))
-Shift.create!(organisation_id: 2, user_id: 4, break_length: "30", start: Time.parse("2020-01-22 07:30"), finish: Time.parse("2020-01-22 17:00"))
-Shift.create!(organisation_id: 2, user_id: 4, break_length: "60", start: Time.parse("2020-01-22 07:30"), finish: Time.parse("2020-01-22 17:00"))
+Shift.create!(organisation_id: org1.id, user_id: jay.id, break_length: "30", start: Time.parse("2020-01-22 07:30"), finish: Time.parse("2020-01-22 17:00"))
+Shift.create!(organisation_id: org1.id, user_id: jay.id, break_length: "30", start: Time.parse("2020-01-22 07:30"), finish: Time.parse("2020-01-22 17:00"))
+Shift.create!(organisation_id: org1.id, user_id: nan.id, break_length: "30", start: Time.parse("2020-01-22 07:30"), finish: Time.parse("2020-01-22 17:00"))
+Shift.create!(organisation_id: org1.id, user_id: roy.id, break_length: "15", start: Time.parse("2020-01-22 07:30"), finish: Time.parse("2020-01-22 17:00"))
+Shift.create!(organisation_id: org2.id, user_id: jay.id, break_length: "30", start: Time.parse("2020-01-22 07:30"), finish: Time.parse("2020-01-22 17:00"))
+Shift.create!(organisation_id: org2.id, user_id: sal.id, break_length: "30", start: Time.parse("2020-01-22 07:30"), finish: Time.parse("2020-01-22 17:00"))
+Shift.create!(organisation_id: org2.id, user_id: sal.id, break_length: "30", start: Time.parse("2020-01-22 07:30"), finish: Time.parse("2020-01-22 17:00"))
+Shift.create!(organisation_id: org2.id, user_id: sal.id, break_length: "60", start: Time.parse("2020-01-22 07:30"), finish: Time.parse("2020-01-22 17:00"))
 puts "There are #{Shift.count} records in the organisations table."
 
 puts "Databases #{Rails.env} tables are now successfully seeded!"
