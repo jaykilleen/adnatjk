@@ -5,7 +5,7 @@ class Shift < ApplicationRecord
   validates_presence_of :start
   validates_presence_of :finish
   validates_presence_of :break_length
-  validates_numericality_of :break_length, greater_than: 0
+  validates_numericality_of :break_length, greater_than: -1
   validate :break_length_cannot_exceed_shift_length
  
   def break_length_cannot_exceed_shift_length

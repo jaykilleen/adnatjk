@@ -6,12 +6,12 @@
 <td class="border px-4 py-2"><%= shift.hours_worked %></td>
 <td class="border px-4 py-2"><%= number_to_currency(shift.cost) %></td>
 <% if policy(shift).update? %>
-  <td class="border px-4 py-2 link"><%= link_to 'Edit', edit_shift_path(shift), remote: true %></td>
+  <td class="border px-4 py-2 link"><%= link_to 'Edit', edit_shift_path(shift) %></td>
 <% else %>
   <td class="border px-4 py-2"></td>
 <% end %>
 <% if policy(shift).destroy? %>
-  <td class="border px-4 py-2 link"><%= link_to 'Destroy', shift, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  <td class="border px-4 py-2 link"><%= link_to 'Destroy', shift, method: :delete, data: { confirm: 'Are you sure?' }, remote: true %></td>
 <% else %>
   <td class="border px-4 py-2"></td>
 <% end %>

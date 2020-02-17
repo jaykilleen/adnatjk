@@ -2,7 +2,7 @@ class ShiftsController < ApplicationController
   before_action :set_shift, only: [:show, :edit, :update, :destroy]
 
   def index
-    @shifts = current_user.organisation.all_employee_shifts if !@shifts.present?
+    @shifts = current_user.organisation.all_employee_shifts
     @shifts = current_user.organisation.all_archived_shifts if params[:deleted].present?
     @shift = Shift.new(user_id: current_user.id, organisation_id: current_user.organisation_id) if !@shift.present?
     respond_to do |format|
@@ -12,7 +12,7 @@ class ShiftsController < ApplicationController
   end
 
   def create
-    @shifts = current_user.organisation.all_employee_shifts if !@shifts.present?
+    @shifts = current_user.organisation.all_employee_shifts
     create_shift_from_params
     if @shift.save
       @shifts = current_user.organisation.all_employee_shifts
@@ -28,18 +28,29 @@ class ShiftsController < ApplicationController
   end
 
   def edit
-    @shifts = current_user.organisation.all_employee_shifts if !@shifts.present?
+    @shifts = current_user.organisation.all_employee_shifts
     respond_to do |format|
+      format.html { render "edit" }
       format.js
     end
   end
 
   def update
-    byebug
+    update_shift_from_params
+    respond_to do |format|
+      if @shift.save
+        format.html { redirect_to root_path, notice: 'Shift was successfully updated.' }
+        format.json { render :show, status: :ok, location: @shift }
+      else
+        format.html { render :edit, notice: 'Shift failed to save.' }
+        format.json { render json: @shift.errors, status: :unprocessable_entity }
+      end
+    end
   end
 
   def destroy
     @shift.destroy
+    @shifts = current_user.organisation.all_employee_shifts
     flash[:notice] = "Shift was successfully destroyed."
     respond_to do |format|
       format.html { redirect_to root_path, notice: 'Shift was successfully destroyed.' }
@@ -62,9 +73,21 @@ class ShiftsController < ApplicationController
     @shift = Shift.new
     @shift.user_id = current_user.id
     @shift.organisation = current_user.organisation
+    @finish_date = finish_date params[:date], params[:start], params[:finish]
     @shift.start  = DateTime.parse(params[:date] + " " + params[:start] + "+1000") if params[:date].present? && params[:start].present?
-    @shift.finish = DateTime.parse(params[:date] + " " + params[:finish]+ "+1000") if params[:date].present? && params[:start].present?
+    @shift.finish = DateTime.parse(                         @finish_date+ "+1000") if params[:date].present? && params[:finish].present?
     @shift.break_length = params[:break_length]
+  end
+
+  def update_shift_from_params
+    @finish_date = finish_date params[:shift][:date], params[:shift][:start], params[:shift][:finish]
+    @shift.start  = DateTime.parse(params[:shift][:date] + " " + params[:shift][:start] + "+1000") if params[:shift][:date].present? && params[:shift][:start].present?
+    @shift.finish = DateTime.parse(         @finish_date + " " + params[:shift][:finish]+ "+1000") if params[:shift][:date].present? && params[:shift][:finish].present?
+    @shift.break_length = params[:shift][:break_length]
+  end
+
+  def finish_date date, start, finish
+    finish < start ? (date.to_date+1).strftime("%Y-%m-%d") : date
   end
 
 end

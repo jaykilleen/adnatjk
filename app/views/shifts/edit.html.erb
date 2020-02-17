@@ -1,0 +1,35 @@
+<div class="container mx-auto">
+  <h1 class="text-3xl bold pt-12"><%= current_user.organisation.name %></h1>
+  <p>Currently paying at <%= number_to_currency(current_user.organisation.hourly_rate) %> per hour.</p>
+  <%= form_with(model: @shift, class: "form-background") do |f| %>
+    <% if @shift.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@shift.errors.count, "error") %> prohibited this shift from being saved:</h2>
+        <ul>
+          <% @shift.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+    <div class="field pt-4 pl-8">
+      <%= f.label :date, class: "field-label" %>
+      <%= f.date_field :date, value: @shift.start.to_date.strftime("%Y-%m-%d"), class: "field-input" %>
+    </div>
+    <div class="field pt-4 pl-8">
+      <%= f.label :start, class: "field-label" %>
+      <%= f.time_field :start, value: @shift.start.strftime("%H:%M"), class: "field-input" %>
+    </div>
+    <div class="field pt-4 pl-8">
+      <%= f.label :finish, class: "field-label" %>
+      <%= f.time_field :finish, value: @shift.finish.strftime("%H:%M"), class: "field-input" %>
+    </div>
+    <div class="field pt-4 pl-8">
+      <%= f.label :finish, class: "field-label" %>
+      <%= f.text_field :break_length, value: @shift.break_length, class: "field-input" %>
+    </div>
+    <div class="actions pt-4">
+      <%= f.submit "Update", class: "btn btn-blue" %> | <%= link_to "Back", :back, class: "text-blue-500" %>
+    </div>
+  <% end %>
+</div>

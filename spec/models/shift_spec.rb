@@ -8,7 +8,7 @@ RSpec.describe Shift, type: :model do
     it { should validate_presence_of(:break_length) }
     it { should belong_to(:user) }
     it { should belong_to(:organisation) }
-    it { should validate_numericality_of(:break_length).is_greater_than(0) }
+    it { should validate_numericality_of(:break_length).is_greater_than(-1) }
   end
 
   describe 'shift length' do
