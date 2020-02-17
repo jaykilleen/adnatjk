@@ -10,8 +10,7 @@ module Features
       click_button 'Sign Up'
     end
 
-    def sign_in
-      user = create(:user)
+    def sign_in user
       visit user_session_path
       fill_in 'user_email', with: user.email
       fill_in 'user_password', with: user.password

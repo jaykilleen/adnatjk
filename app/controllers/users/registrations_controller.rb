@@ -9,13 +9,14 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   def update
+    byebug
     super
   end
 
   private
 
-  def sign_up_params
-    params.require(:user).permit(:name, :email, :organisation_id, :password, :password_confirmation)
+  def user_params
+    params.require(:user).permit(:name, :email, :password, :password_confirmation)
   end
 
 end

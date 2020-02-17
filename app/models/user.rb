@@ -10,7 +10,7 @@ class User < ApplicationRecord
   
   belongs_to :organisation, optional: true
   accepts_nested_attributes_for :organisation
-  has_many :shifts
+  has_many :shifts, dependent: :delete_all
 
   def delete_shifts_from organisation
     shifts = self.shifts.where(organisation_id: organisation.id)
