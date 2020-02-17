@@ -4,7 +4,7 @@
 <td class="border px-4 py-2"><%= shift.finish.strftime("%I:%M%p") %></td>
 <td class="border px-4 py-2"><%= shift.break_length %></td>
 <td class="border px-4 py-2"><%= shift.hours_worked %></td>
-<td class="border px-4 py-2"><%= shift.cost %></td>
+<td class="border px-4 py-2"><%= number_to_currency(shift.cost) %></td>
 <% if policy(shift).update? %>
   <td class="border px-4 py-2 link"><%= link_to 'Edit', edit_shift_path(shift), remote: true %></td>
 <% else %>
