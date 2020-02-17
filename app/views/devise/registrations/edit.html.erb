@@ -42,7 +42,7 @@
     </div>
   <% end %>
 
-  <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete , class: "btn btn-red"%>
+  <%= button_to "Cancel my account", current_user, method: :delete, data: { confirm: "You sure?" }, class: "btn btn-red" %>
 
   <div class="py-8">
     <%= link_to "Back", :back, class: "text-blue-500" %>
