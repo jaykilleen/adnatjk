@@ -1,0 +1,6 @@
+<td class="border px-4 py-2"><%= current_user.name %></td>
+<td class="border px-4 py-2"><%= f.date_field :date %></td>
+<td class="border px-4 py-2"><%= f.time_field :start %></td>
+<td class="border px-4 py-2"><%= f.time_field :finish %></td>
+<td class="border px-4 py-2"><%= f.text_field :break_length, value: '30' %></td>
+<td colspan="4" class="border px-4 py-2"><%= f.submit "Create New Shift", class: "btn btn-blue" %></td>

@@ -1,0 +1,5 @@
+var shift = document.querySelector("#shift-<%= @shift.id %>")
+var shifts = document.querySelector("#shifts")
+
+shift.innerHTML = "<%= escape_javascript(render partial: 'edit', locals: {shift: @shift } ) %>"
+document.getElementById("shift_form").method = "patch"; 

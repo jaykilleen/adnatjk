@@ -1,0 +1,18 @@
+<td class="table-cell"><%= current_user.name %></td>
+<td class="table-cell">
+  <input type="date" value="<%= shift.start.to_date.strftime("%Y-%m-%d") %>" name="shift[date]" id="shift_date">
+</td>
+<td class="table-cell">
+  <input type="time" value="<%= shift.start.strftime("%H:%M") %>" name="shift[start]" id="shift_start">
+</td>
+<td class="table-cell">
+  <input type="time" value="<%= shift.finish.strftime("%H:%M") %>" name="shift[finish]" id="shift_finish">
+</td>
+<td class="table-cell">
+  <input value="<%= shift.break_length %>" type="text" name="shift[break_length]" id="shift_break_length">
+</td>
+<td colspan="4" class="table-cell">
+  <input type="submit" name="commit" value="Update" class="btn btn-blue" data-disable-with="Create Shift">
+  <%= link_to 'Cancel', shifts_path, class: "link", remote: true %>
+</td>
+

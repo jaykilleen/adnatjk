@@ -1,5 +1,5 @@
 <div class="container mx-auto pt-16 text-gray-500">
   <% if user_signed_in? %>
-    <p>Logged in as <%= current_user.name %> | <%= link_to "Edit", edit_user_registration_path(current_user) %></p>
+    <p>Logged in as <%= current_user.name %> | <%= link_to "Edit", edit_user_registration_path %></p>
   <% end %>
 </div>

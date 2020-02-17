@@ -1,5 +1,5 @@
 class ShiftsController < ApplicationController
-  before_action :set_organisation, only: [:show, :edit, :update, :destroy]
+  before_action :set_shift, only: [:show, :edit, :update, :destroy]
 
   def index
     @shifts = current_user.organisation.all_employee_shifts if !@shifts.present?
@@ -15,26 +15,41 @@ class ShiftsController < ApplicationController
     create_shift_from_params
     if @shift.save
       @shifts = current_user.organisation.all_employee_shifts
-      redirect_to root_path, notice: "Shift was successfully created."
+      flash[:notice] = "Shift was successfully created."
     else
       error_messages = @shift.errors.full_messages.map { |message| message + ", " }
       flash[:notice] = "#{ (@shift.errors.count.to_s + " error").pluralize } prohibited this shift from being saved. #{ error_messages }."
-      render "pages/index"
     end
+    respond_to do |format|
+      format.html { render "pages/index" }
+      format.js { render "index" }
+    end
+  end
+
+  def edit
+    @shifts = current_user.organisation.all_employee_shifts if !@shifts.present?
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  def update
+    byebug
   end
 
   def destroy
     @shift.destroy
+    flash[:notice] = "Shift was successfully destroyed."
     respond_to do |format|
       format.html { redirect_to root_path, notice: 'Shift was successfully destroyed.' }
-      format.json { head :no_content }
+      format.js { render "index" }
     end
   end
 
   private
 
   # Use callbacks to share common setup or constraints between actions.
-  def set_organisation
+  def set_shift
     @shift = Shift.find(params[:id])
   end
 
@@ -46,8 +61,8 @@ class ShiftsController < ApplicationController
     @shift = Shift.new
     @shift.user_id = current_user.id
     @shift.organisation = current_user.organisation
-    @shift.start  = DateTime.parse(params[:shift][:date] + " " + params[:shift][:start])
-    @shift.finish = DateTime.parse(params[:shift][:date] + " " + params[:shift][:finish])
+    @shift.start  = DateTime.parse(params[:shift][:date] + " " + params[:shift][:start]) if params[:shift][:date].present? && params[:shift][:start].present?
+    @shift.finish = DateTime.parse(params[:shift][:date] + " " + params[:shift][:finish]) if params[:shift][:date].present? && params[:shift][:start].present?
     @shift.break_length = params[:shift][:break_length]
   end
 

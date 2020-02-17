@@ -1,2 +1,5 @@
 var shifts = document.querySelector("#shifts")
-shifts.innerHTML = "<%= escape_javascript(render partial: 'shifts/shifts' ) %>"
+var flashes = document.querySelector("#flashes")
+
+flashes.innerHTML = "<%= escape_javascript(render partial: 'flashes' ) %>"
+shifts.innerHTML = "<%= escape_javascript(render partial: 'table' ) %>"
