@@ -7,7 +7,7 @@ class Organisation < ApplicationRecord
 
   def all_employee_shifts
     all_employee_shifts = []
-    Shift.where(organisation_id: self.id).order("finish DESC").each do |shift|
+    Shift.where(organisation_id: self.id).order(date: :desc, finish: :desc).each do |shift|
       all_employee_shifts << shift
     end
   end
