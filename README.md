@@ -17,16 +17,20 @@ After cloning this repository, please ensure you have the following dependencies
 
 If this is your first time installing Ruby or Ruby on Rails then please follow [Chris from Gorails' excellent guide](https://gorails.com/setup/ubuntu/18.04).
 
-After cloning, and validating your dependcies please follow these steps:
-`bundle install`
+After cloning, and validating your dependencies please follow these steps:  
+`bundle install`  
 `yarn install --check-files`
 
-Delete the `credentials.yml.enc` file/  
-Regenerate a new `credentials.yml.enc` and `master.key` by running the command `EDITOR=vim rails credentials:edit`  
+You will need to create a file `config/master.key` and paste/save this text `1e051083153e89ff311b1b4d32041107` in that file.  
+**Note:** This is a _challenge_ app. If you plan to clone and use this app yourself then you **MUST** regenerate the credentials and master.key.  
+Follow the steps below to regenerate a `credentials.yml.enc` and `master.key`.
+
+Delete the `credentials.yml.enc` file.
+Regenerate a new `credentials.yml.enc` and `master.key` by running the command `EDITOR=vim rails credentials:edit`.
 
 ## Database creation and seeding
 
-You should now be ready to create your database, migrate the tables and seed with seed data.
+You should now be ready to create your database, migrate the tables and seed with seed data.  
 The `database.yml` has been setup to use your default `postgres` username and password.
 
 `rails db:setup`
@@ -47,6 +51,6 @@ Use foreman to run the Procfile.dex which will start the rails server and webpac
 
 _This application has not been configured for deployment_
 
-Once the rails server is running please visit [localhost:3000](http://localhost:3000) to interact with Adnat!
+Once the rails server is running please visit [localhost:3000](http://localhost:3000) to interact with Adnat!  
 
 If you get an error like `rails Webpacker can't find application` then you may need to re-run `yarn`.  
