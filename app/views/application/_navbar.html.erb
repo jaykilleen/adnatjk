@@ -6,6 +6,7 @@
     </div>
     <div class="flex justify-end ml-auto pr-2 items-center">
       <% if user_signed_in? %>
+        <p class="pr-8">Logged in as <%= current_user.name %> | <%= link_to "Edit", edit_user_registration_path, class: "link" %></p>
         <%= link_to destroy_user_session_path, method: :delete do %>
           <ul class="text-xl mr-6 py-2 px-6 shadow-md text-bold border-gray-900 border-2 bg-gray-900 text-white hover:bg-gray-700 hover:border-gray-700 rounded">Log Out</ul>
         <% end %>
