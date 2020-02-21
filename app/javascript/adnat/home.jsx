@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from "prop-types"
 import Clock from './components/clock'
 import Shifts from './shifts/shifts'
 
@@ -10,7 +11,7 @@ class Home extends React.Component {
   render() {
     return (
       <div className="container mx-auto">
-  <h1 className="text-6xl">Hello, world!!</h1>
+        <h1 className="text-6xl">Hello, world!!</h1>
         <Clock />
         <Shifts />
       </div>
