@@ -5,5 +5,5 @@ Rails.application.routes.draw do
   resources :organisations
   resources :shifts
   root to: "pages#index"
-  get '/pages/react', to: 'pages#react'
+  get '/react', to: 'pages#react'
 end
