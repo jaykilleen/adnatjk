@@ -8,7 +8,7 @@ class ShiftsController < ApplicationController
     respond_to do |format|
       format.html { render "pages/index" }
       format.js
-      format.json { render json: @shifts }
+      format.json
     end
   end
 
